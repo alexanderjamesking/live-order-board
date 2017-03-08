@@ -43,8 +43,3 @@
   Orders by price descending."
   [orders]
   (order-summary orders :buy (partial sort-by :price desc)))
-
-
-;; TODO: document any complicated functions - update project.clj with decent description, add readme etc - double check the SPEC!
-; (remove #(= % order) coll) is simpler but this removes all orders that match
-; Ideally I would introduce order-id and search for this instead
