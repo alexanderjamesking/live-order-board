@@ -31,28 +31,28 @@
 
   (testing "Order summary for sell orders"
     (let [orders (atom [sell-a sell-b sell-c sell-d])
-          summary (order-summary-sell @orders)]
+          summary (order-summary-sell orders)]
       (is (= ["5.5 kg for £306"
               "1.5 kg for £307"
               "1.2 kg for £310"] summary))))
 
   (testing "Buy orders not included in order-summary-sell"
     (let [orders (atom [sell-a sell-b sell-c sell-d buy-a])
-          summary (order-summary-sell @orders)]
+          summary (order-summary-sell orders)]
       (is (= ["5.5 kg for £306"
               "1.5 kg for £307"
               "1.2 kg for £310"] summary))))
 
   (testing "Order summary for buy orders"
     (let [orders (atom [buy-a buy-b buy-c buy-d])
-          summary (order-summary-buy @orders)]
+          summary (order-summary-buy orders)]
       (is (= ["1.2 kg for £310"
               "1.5 kg for £307"
               "5.5 kg for £306"] summary))))
 
   (testing "Sell orders not included in order-summary-buy"
     (let [orders (atom [buy-a buy-b buy-c buy-d sell-a])
-          summary (order-summary-buy @orders)]
+          summary (order-summary-buy orders)]
       (is (= ["1.2 kg for £310"
               "1.5 kg for £307"
               "5.5 kg for £306"] summary)))))

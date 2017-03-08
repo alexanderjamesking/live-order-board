@@ -19,7 +19,7 @@ lein repl
 (register-order! orders order)
 
 ; view the sell order summary
-(order-summary-sell @orders)
+(order-summary-sell orders)
 
 ; remove an order
 (cancel-order! orders order)

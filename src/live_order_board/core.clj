@@ -3,13 +3,13 @@
 (defrecord Order [user-id quantity price order-type])
 
 (defn register-order!
-  "takes an atom of a sequence of orders and an order, adds
-  the order to the sequence"
+  "Takes an atom of a sequence of orders and an order, adds
+   the order to the sequence"
   [orders order]
   (swap! orders conj order))
 
 (defn cancel-order!
-  "takes an atom of a sequence of orders and an order, removes
+  "Takes an atom of a sequence of orders and an order, removes
   the order from the sequence"
   [orders order]
   (swap! orders (fn [coll]
@@ -31,15 +31,17 @@
        order-summary->str))
 
 (defn order-summary-sell
-  "Returns an order summary for sell orders, filters out buy orders
+  "Takes an atom of a sequence of orders.
+  Returns an order summary for sell orders, filters out buy orders
   Orders by price ascending."
   [orders]
-  (order-summary orders :sell (partial sort-by :price)))
+  (order-summary @orders :sell (partial sort-by :price)))
 
 (def desc #(compare %2 %1))
 
 (defn order-summary-buy
-  "Returns an order summary for buy orders, filters out sell orders.
+  "Takes an atom of a sequence of orders.
+  Returns an order summary for buy orders, filters out sell orders.
   Orders by price descending."
   [orders]
-  (order-summary orders :buy (partial sort-by :price desc)))
+  (order-summary @orders :buy (partial sort-by :price desc)))
